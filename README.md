@@ -1,2 +1,2 @@
-# stralingv
+# strălingv
 My linguistic project.
