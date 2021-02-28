@@ -9,10 +9,14 @@ with open('lang_codes.json') as r:
 
 
 def strip_long_vowels(word):
-    return word.replace('ē', 'e').replace('ū', 'u')
+    return word.replace('ā', 'a').replace('ē', 'e').replace('ī', 'i').replace('ō', 'o').replace('ū', 'u')
 
 
-class Wikiword():
+def parse_desc(temp):
+    args = temp.split('|')
+
+
+class WikiWord():
 
     def __init__(self, word, lang_code):
         self.word = word
@@ -39,8 +43,17 @@ class Wikiword():
                             full, flags=re.DOTALL)
             if res:
                 return res[0]
-    
+        return ''
+
     def get_descendants(self):
-        reg = r'{{desc\|(?P<lang_code>.*?)\|(?P<term>.*?)[}\|]'
-        return [Wikiword(desc['term'], desc['lang_code'])
+        reg = r'{{desc\|([^|]*?\=[^|]*?[\|\}])*(?P<lang_code>.*?)\|(?P<term>.*?)[}\|]'
+
+        return [WikiWord(desc['term'], desc['lang_code'])
                 for desc in re.finditer(reg, self.get_entry())]
+
+    def print_descendants(self, level=0):
+        print('\t'*level, self)
+        for desc in self.get_descendants():
+            desc.print_descendants(level+1)
+
+
