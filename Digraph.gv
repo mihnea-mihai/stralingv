@@ -1,0 +1,96 @@
+digraph {
+	O	[label="English
+film"];
+	DESC0	[label="Arabic
+فِلْم"];
+	O -> DESC0	[label=descendant,
+		minlen=1];
+	DESC1	[label="Catalan
+film"];
+	O -> DESC1	[label=descendant,
+		minlen=2];
+	DESC2	[label="Crimean Tatar
+film"];
+	O -> DESC2	[label=descendant,
+		minlen=3];
+	DESC3	[label="French
+film"];
+	O -> DESC3	[label=descendant,
+		minlen=4];
+	DESC4	[label="Galician
+filme"];
+	O -> DESC4	[label=descendant,
+		minlen=5];
+	DESC5	[label="German
+Film"];
+	O -> DESC5	[label=descendant,
+		minlen=1];
+	DESC6	[label="Hungarian
+film"];
+	O -> DESC6	[label=descendant,
+		minlen=2];
+	DESC7	[label="Italian
+film"];
+	O -> DESC7	[label=descendant,
+		minlen=3];
+	DESC8	[label="Japanese
+フィルム"];
+	O -> DESC8	[label=descendant,
+		minlen=4];
+	DESC9	[label="Lao
+ຟີມ"];
+	O -> DESC9	[label=descendant,
+		minlen=5];
+	DESC10	[label="Norman
+film"];
+	O -> DESC10	[label=descendant,
+		minlen=1];
+	DESC11	[label="Polish
+film"];
+	O -> DESC11	[label=descendant,
+		minlen=2];
+	DESC12	[label="Portuguese
+filme"];
+	O -> DESC12	[label=descendant,
+		minlen=3];
+	DESC13	[label="Russian
+фильм"];
+	O -> DESC13	[label=descendant,
+		minlen=4];
+	DESC14	[label="Serbo-Croatian
+фи̏лм"];
+	O -> DESC14	[label=descendant,
+		minlen=5];
+	DESC15	[label="Spanish
+filme"];
+	O -> DESC15	[label=descendant,
+		minlen=1];
+	DESC16	[label="Thai
+ฟิล์ม"];
+	O -> DESC16	[label=descendant,
+		minlen=2];
+	DESC17	[label="Urdu
+فلم"];
+	O -> DESC17	[label=descendant,
+		minlen=3];
+	DESC18	[label="Welsh
+ffilm"];
+	O -> DESC18	[label=descendant,
+		minlen=4];
+	DESC19	[label="Chinese
+菲林"];
+	O -> DESC19	[label=descendant,
+		minlen=5];
+	Inh0	[label="Middle English
+filme"];
+	Inh0 -> O	[label=inherited,
+		minlen=1];
+	Inh1	[label="Old English
+filmen"];
+	Inh1 -> O	[label=inherited,
+		minlen=2];
+	Inh2	[label="Proto-Germanic
+*filminją"];
+	Inh2 -> O	[label=inherited,
+		minlen=3];
+}

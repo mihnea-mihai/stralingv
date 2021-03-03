@@ -12,8 +12,37 @@ def strip_long_vowels(word):
     return word.replace('ā', 'a').replace('ē', 'e').replace('ī', 'i').replace('ō', 'o').replace('ū', 'u')
 
 
-def parse_desc(temp):
-    args = temp.split('|')
+def parse_arglist(arglist):
+
+    args = {'temp': arglist[0]}
+    
+    for e in arglist:
+        if '=' in e:
+            arg, val = e.split('=', maxsplit=1)
+            args[arg] = val
+
+    pos_args = [e for e in arglist if '=' not in e]
+
+    if args['temp'] in ['inh', 'der', 'bor']:
+        args['target_lang_code'] = pos_args[1]
+        args['source_lang_code'] = pos_args[2]
+        try:
+            args['term'] = pos_args[3]
+        except:
+            args['term'] = ''
+
+    if args['temp'] in ['l', 'm', 'term', 'desc']:
+        args['lang_code'] = pos_args[1]
+        try:
+            args['term'] = pos_args[2]
+        except:
+            args['term'] = ''
+
+    return args
+
+
+def parse_temp(temp):
+    return parse_arglist(temp.split('|'))
 
 
 class WikiWord():
@@ -22,6 +51,7 @@ class WikiWord():
         self.word = word
         self.lang_code = lang_code
         self.lang = lang_codes[self.lang_code]
+        self.node = f'{self.lang}\n{self.word}'
 
     def __repr__(self):
         return f'{self.lang} {self.word}'
@@ -45,15 +75,36 @@ class WikiWord():
                 return res[0]
         return ''
 
-    def get_descendants(self):
-        reg = r'{{desc\|([^|]*?\=[^|]*?[\|\}])*(?P<lang_code>.*?)\|(?P<term>.*?)[}\|]'
+    def get_templates_(self):
+        reg = r'{{(?P<temp>.*?)}}'
+        return [parse_temp(m['temp'])
+                for m in re.finditer(reg, self.get_entry())]
 
-        return [WikiWord(desc['term'], desc['lang_code'])
-                for desc in re.finditer(reg, self.get_entry())]
+    def get_templates(self):
+        try:
+            return self.templates
+        except:
+            self.templates = self.get_templates_()
+            return self.templates
+
+    def get_ascendants(self, asc):
+        ascs = []
+        for t in self.get_templates():
+            if asc == None or t['temp'] == asc:
+                if t['term'] not in ['-', '']:
+                    ascs.append(WikiWord(t['term'], t['source_lang_code']))
+        return ascs
+
+    def get_descendants(self):
+        for t in self.get_templates():
+            if t['temp'] == 'desc':
+                if t['term'] not in ['-', '', None]:
+                    yield(WikiWord(t['term'], t['lang_code']))
+
+    """
 
     def print_descendants(self, level=0):
         print('\t'*level, self)
         for desc in self.get_descendants():
             desc.print_descendants(level+1)
-
-
+    """

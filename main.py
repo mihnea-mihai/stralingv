@@ -6,4 +6,6 @@ while(True):
     print('Tests: Latin eradico, Latin audio, P-Ger gudą')
     lemma = input('Word: ')
     lang_code = input('Lang: ')
-    WikiWord(lemma, lang_code).print_descendants()
+
+    for temp in WikiWord(lemma, lang_code).get_inherited_from():
+        print(temp)
