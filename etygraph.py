@@ -26,4 +26,4 @@ class Etygraph:
         dot.view()
 
 
-Etygraph(WikiWord('film', 'en'))
+Etygraph(WikiWord('museum', 'en'))
