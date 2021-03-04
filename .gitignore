@@ -131,3 +131,7 @@ dmypy.json
 # VSCode settings
 .vscode/
 vscode/
+
+# Graphviz previews
+Digraph.gv
+Digraph.gv.pdf
