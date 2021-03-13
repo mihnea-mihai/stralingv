@@ -42,5 +42,5 @@ class EtyGraph:
 
 
 EtyGraph({
-    WikiWord('crește', 'ro'),
+    WikiWord('*ḱer-', 'ine-pro'),
     })
