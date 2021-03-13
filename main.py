@@ -3,7 +3,7 @@ from wikiword import WikiWord
 while(True):
     print('To exit press Crtl+C.')
     print('Show all descendants of a word: (example: "campus", "la")')
-    print('Tests: Latin eradico, Latin audio, P-Ger gudą')
+    print('Tests: Latin eradico, Latin audio, P-Ger gudą, German Herz')
     lemma = input('Word: ')
     lang_code = input('Lang: ')
 
